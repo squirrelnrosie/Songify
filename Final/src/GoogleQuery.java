@@ -118,18 +118,11 @@ public class GoogleQuery
 				//		System.out.println(title);
 					}
 				}
-				if (title.indexOf("相關歌詞")!=-1) {
+				if (title.indexOf("相關")!=-1 || title.indexOf("圖片")!=-1 || title.indexOf("Song Directory")!=-1 || title.indexOf("相关")!=-1) {
 					ListForTitles.remove(ListForTitles.size()-1);
 					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
 				}
-				if (title.indexOf("圖片")!=-1) {
-					ListForTitles.remove(ListForTitles.size()-1);
-					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
-				}
-				if (title.indexOf("Song Directory")!=-1) {
-					ListForTitles.remove(ListForTitles.size()-1);
-					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
-				}
+
 //				System.out.println(li.select("a").get(0).attr("href"));
 
 				//				for(int i = 0 ; i < block.size(); i++)
