@@ -1,3 +1,4 @@
+import java.awt.List;
 import java.io.BufferedReader;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class GoogleQuery
 
 		this.searchKeyword = searchKeyword;
 
-		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=13";
+		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
 
 	}
 
@@ -107,18 +108,28 @@ public class GoogleQuery
 				url = url.substring(http, sa);
 				if (url.indexOf("youtube.com")==-1) {
 					ListForResultsUrl.add(url);
-					System.out.println(url);
+				//	System.out.println(url);
 				}
 				
 				String title = li.select(".BNeawe").get(0).text();
 				if (title.indexOf("YouTube")==-1) {
 					if (ListForTitles.size()==ListForResultsUrl.size()-1) {
 						ListForTitles.add(title);
-						System.out.println(title);
+				//		System.out.println(title);
 					}
 				}
-				
-				
+				if (title.indexOf("相關歌詞")!=-1) {
+					ListForTitles.remove(ListForTitles.size()-1);
+					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
+				}
+				if (title.indexOf("圖片")!=-1) {
+					ListForTitles.remove(ListForTitles.size()-1);
+					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
+				}
+				if (title.indexOf("Song Directory")!=-1) {
+					ListForTitles.remove(ListForTitles.size()-1);
+					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
+				}
 //				System.out.println(li.select("a").get(0).attr("href"));
 
 				//				for(int i = 0 ; i < block.size(); i++)
@@ -138,7 +149,6 @@ public class GoogleQuery
 
 			} catch (IndexOutOfBoundsException e) {
 
-				
 
 			}
 			if (ListForTitles.size()!=ListForResultsUrl.size()) {
@@ -146,6 +156,10 @@ public class GoogleQuery
 			}
 			
 
+		}
+		for (int a = 0; a<ListForResultsUrl.size(); a++) {
+			System.out.println(ListForTitles.get(a));
+			System.out.println(ListForResultsUrl.get(a));
 		}
 		return retVal;
 
@@ -157,5 +171,14 @@ public class GoogleQuery
 	
 	public ArrayList<String> getUrlList(){
 		return ListForResultsUrl;
+	}
+	
+	public void removeTitle(int index) {
+		ListForTitles.remove(index);
+		
+	}
+	
+	public void removeUrl(int index) {
+		ListForResultsUrl.remove(index);
 	}
 }

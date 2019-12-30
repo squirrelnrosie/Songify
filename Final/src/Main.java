@@ -31,8 +31,15 @@ public class Main {
 			keywords.add(new Keyword("album", 4));
 			keywords.add(new Keyword("track", 4));
 			keywords.add(new Keyword("artist", 4));
+			keywords.add(new Keyword("歌詞", 5));
+			keywords.add(new Keyword("歌曲", 5));
+			keywords.add(new Keyword("作曲", 3));
+			keywords.add(new Keyword("作詞", 3));
+			keywords.add(new Keyword("專輯", 4));
+			keywords.add(new Keyword("歌手", 4));
 			
-			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
+			GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
+			//GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
 			
 			System.out.println("Size of results: " + query.getUrlList().size()); // search results
@@ -65,7 +72,7 @@ public class Main {
 			*/
 		
 			for (int m = 0; m<query.getUrlList().size(); m++) {
-			//for (int m = 0; m<3; m++) {
+			//for (int m = 0; m<10; m++) {
 				WebPage rootPage = new WebPage(query.getUrlList().get(m), query.getTitleList().get(m));		
 				WebTree tree = new WebTree(rootPage);
 				ListForSearchResults.add(tree.root);
@@ -73,40 +80,39 @@ public class Main {
 				//System.out.println(query.getUrlList().get(10));
 				//System.out.println(ListForSubpage.size());
 				// int SubpageSize = subpage.getSubpageSize();
-					if (ListForSubpage.size()<50) {
-						for (String sub:ListForSubpage) {
-							//System.out.println("here");
-							tree.root.addChild(new WebNode(new WebPage(sub,"HI")));
-						}
-						System.out.println("Adding subpages is done.");
+				if (ListForSubpage.size()==0) {
+					System.out.println("No subpages");
+				}
+				else if (ListForSubpage.size()<3) {
+					for (String sub : ListForSubpage) {
+						tree.root.addChild(new WebNode(new WebPage(sub, "HI")));
 					}
-					else {
-						for (int s = 0; s<=50; s++) {
-							tree.root.addChild(new WebNode(new WebPage(ListForSubpage.get(s), "HI")));
-						}
-						System.out.println("Adding subpages is done.");
+				}
+				else {
+					for (int s = 0; s<3; s++) {
+						tree.root.addChild(new WebNode(new WebPage(ListForSubpage.get(s), "HI")));
 					}
+					System.out.println("Adding subpages is done.");
+				}
 				
 				//for (int z = 0; z<2; z++) {
 				//	System.out.println(tree.root.children.get(z).webPage.url);
 				//}
-			
-					try {
-						tree.setPostOrderScore(keywords);
-					}catch (Exception e) {
-						System.out.println("error: ");
-						e.printStackTrace();
-					}
-				
+				try {
+					tree.setPostOrderScore(keywords);
+				}catch (Exception e) {
+					System.out.println("error: ");
+					e.printStackTrace();
+				}	
 				System.out.println("Grading is done.");
 				System.out.println("Score:" + tree.root.nodeScore);
 				System.out.println();
 			}
 			sort();
 			Collections.reverse(ListForSearchResults);
-			for (WebNode result:ListForSearchResults) {
-				System.out.print(result.nodeScore + "\t");
-				System.out.println(result.webPage.name);
+			for(int x = 0; x<ListForSearchResults.size(); x++) {
+				System.out.print(ListForSearchResults.get(x).nodeScore + "\t");
+				System.out.println(ListForSearchResults.get(x).webPage.name);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

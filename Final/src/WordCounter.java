@@ -33,7 +33,9 @@ public class WordCounter {
     }
     
     public int countKeyword(String keyword) throws IOException{
-		content = fetchContent();
+    	if (content == null){
+		    content = fetchContent();
+		}
 		
 		//To do a case-insensitive search, we turn the whole content and keyword into upper-case:
 		content = content.toUpperCase();
