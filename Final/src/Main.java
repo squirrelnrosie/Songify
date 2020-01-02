@@ -12,7 +12,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		
 		Scanner in = new Scanner(System.in);
 		String teString = in.nextLine();
 		String[] userInput = teString.split(" ");
@@ -22,7 +21,7 @@ public class Main {
 			input += userinput + "+";
 		}
 		// System.out.println(input);
-		
+			
 		try {
 			ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 			keywords.add(new Keyword("lyrics", 5));
