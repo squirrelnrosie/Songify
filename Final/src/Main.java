@@ -46,6 +46,7 @@ public class Main {
 			System.out.println();
 			Subpage subpage = new Subpage();
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
+			
 		
 			/**
 			for (int a = 0; a<3; a++) {
@@ -114,10 +115,15 @@ public class Main {
 				System.out.print(ListForSearchResults.get(x).nodeScore + "\t");
 				System.out.println(ListForSearchResults.get(x).webPage.name);
 			}
+			
+			query.search();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
 		
 		/**
 		try{
