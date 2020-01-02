@@ -197,7 +197,6 @@ public class GoogleQuery
 				newcontent =a.substring(chn);
 			}
 			System.out.println("相關搜尋結果："+chineselist);
-		
 		}
 		
 		
