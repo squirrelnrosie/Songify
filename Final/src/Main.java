@@ -132,7 +132,6 @@ public class Main {
 			e.printStackTrace();
 		}
 		*/
-		
 	}
 
 	public static void sort(){
