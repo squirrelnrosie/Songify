@@ -123,7 +123,6 @@ public class Main {
 			e.printStackTrace();
 		}
 	
-		
 		/**
 		try{
 			Subpage subpage = new Subpage();
