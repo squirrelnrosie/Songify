@@ -179,6 +179,7 @@ public class GoogleQuery
 		ListForResultsUrl.remove(index);
 	}
 	
+	
 	//相關搜尋結果
 	public ArrayList<String> search(){
 		if (content.contains("相關搜尋")) {

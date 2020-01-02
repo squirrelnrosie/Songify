@@ -48,6 +48,7 @@ public class Main {
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
 			
 			
+			
 		
 			
 			/**
