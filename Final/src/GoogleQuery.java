@@ -200,6 +200,7 @@ public class GoogleQuery
 		}
 		
 		
+		
 		else {
 			System.out.println("沒有相關搜尋");
 		}
