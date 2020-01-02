@@ -47,6 +47,7 @@ public class Main {
 			Subpage subpage = new Subpage();
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
 			
+			
 		
 			/**
 			for (int a = 0; a<3; a++) {
