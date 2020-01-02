@@ -115,7 +115,7 @@ public class Main {
 				System.out.print(ListForSearchResults.get(x).nodeScore + "\t");
 				System.out.println(ListForSearchResults.get(x).webPage.name);
 			}
-			
+			//相關搜尋結果
 			query.search();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

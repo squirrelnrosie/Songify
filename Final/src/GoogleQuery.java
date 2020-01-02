@@ -196,7 +196,7 @@ public class GoogleQuery
 				chineselist.add(chinese);
 				newcontent =a.substring(chn);
 			}
-			System.out.println("相關搜尋結果"+chineselist);
+			System.out.println("相關搜尋結果："+chineselist);
 			
 			
 		}
