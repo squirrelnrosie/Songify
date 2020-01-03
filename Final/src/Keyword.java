@@ -12,3 +12,4 @@ public class Keyword {
 		return "["+name+","+weight+"]";
 	}
 }
+
