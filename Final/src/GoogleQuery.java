@@ -37,6 +37,8 @@ public class GoogleQuery
 	public String url;
 
 	public String content;
+	
+	public ArrayList chineselist = new ArrayList();
 
 	public GoogleQuery(String searchKeyword)
 
@@ -44,7 +46,7 @@ public class GoogleQuery
 
 		this.searchKeyword = searchKeyword;
 
-		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
+		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=10";
 
 	}
 
@@ -88,6 +90,8 @@ public class GoogleQuery
 		}
 
 		HashMap<String, String> retVal = new HashMap<String, String>();
+		
+		
 		
 		Document doc = Jsoup.parse(content);
 		// System.out.println(doc.text());
@@ -173,5 +177,34 @@ public class GoogleQuery
 	
 	public void removeUrl(int index) {
 		ListForResultsUrl.remove(index);
+	}
+	
+	//相關搜尋結果
+	public ArrayList<String> search(){
+		if (content.contains("相關搜尋")) {
+			int search = content.indexOf("相關搜尋");
+			String newcontent =content.substring(search);
+			
+			while(newcontent.contains("div class=\"BNeawe deIvCb AP7Wnd")) 
+			{
+				int s= newcontent.indexOf("div class=\"BNeawe deIvCb AP7Wnd");
+				String a = newcontent.substring(s+33);
+				
+				int chn =a.indexOf("<");
+				String chinese = a.substring(0,chn);
+				//System.out.println(chinese);
+				chineselist.add(chinese);
+				newcontent =a.substring(chn);
+			}
+			System.out.println("相關搜尋結果："+chineselist);
+		}
+		
+		
+		
+		
+		else {
+			System.out.println("沒有相關搜尋");
+		}
+		return chineselist;
 	}
 }

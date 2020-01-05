@@ -12,7 +12,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		
 		Scanner in = new Scanner(System.in);
 		String teString = in.nextLine();
 		String[] userInput = teString.split(" ");
@@ -22,6 +21,7 @@ public class Main {
 			input += userinput + "+";
 		}
 		// System.out.println(input);
+			
 		
 		try {
 			ArrayList<Keyword> keywords = new ArrayList<Keyword>();
@@ -38,15 +38,16 @@ public class Main {
 			keywords.add(new Keyword("專輯", 4));
 			keywords.add(new Keyword("歌手", 4));
 			
-			GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
-			//GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
+			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
+			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
 			
 			System.out.println("Size of results: " + query.getUrlList().size()); // search results
 			System.out.println();
 			Subpage subpage = new Subpage();
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
-		
+			
+	
 			/**
 			for (int a = 0; a<3; a++) {
 				subpage.fetchSubpage(query.getUrlList().get(a));
@@ -71,7 +72,7 @@ public class Main {
 			}
 			*/
 		
-			for (int m = 0; m<query.getUrlList().size(); m++) {
+			for (int m = 0; m<query.getUrlList().size()-1; m++) {
 			//for (int m = 0; m<10; m++) {
 				WebPage rootPage = new WebPage(query.getUrlList().get(m), query.getTitleList().get(m));		
 				WebTree tree = new WebTree(rootPage);
@@ -114,11 +115,14 @@ public class Main {
 				System.out.print(ListForSearchResults.get(x).nodeScore + "\t");
 				System.out.println(ListForSearchResults.get(x).webPage.name);
 			}
+			
+			//相關搜尋結果
+			query.search();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 		/**
 		try{
 			Subpage subpage = new Subpage();
@@ -127,7 +131,8 @@ public class Main {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		*/
+		*/	
+		
 	}
 
 	public static void sort(){
