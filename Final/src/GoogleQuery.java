@@ -46,7 +46,7 @@ public class GoogleQuery
 
 		this.searchKeyword = searchKeyword;
 
-		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=10";
+		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
 
 	}
 
@@ -110,13 +110,13 @@ public class GoogleQuery
 				int http = url.indexOf("http");
 				int sa = url.indexOf("&sa");
 				url = url.substring(http, sa);
-				if (url.indexOf("youtube.com")==-1) {
+				if (url.indexOf("youtube.com")==-1&&url.indexOf(".pdf")==-1) {
 					ListForResultsUrl.add(url);
 				//	System.out.println(url);
 				}
 				
 				String title = li.select(".BNeawe").get(0).text();
-				if (title.indexOf("YouTube")==-1) {
+				if (title.indexOf("YouTube")==-1&&title.indexOf("PDF")==-1&&title.indexOf("pdf")==-1) {
 					if (ListForTitles.size()==ListForResultsUrl.size()-1) {
 						ListForTitles.add(title);
 				//		System.out.println(title);

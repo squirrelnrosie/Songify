@@ -23,6 +23,7 @@ public class Main {
 		// System.out.println(input);
 			
 		
+		
 		try {
 			ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 			keywords.add(new Keyword("lyrics", 5));
@@ -38,8 +39,8 @@ public class Main {
 			keywords.add(new Keyword("專輯", 4));
 			keywords.add(new Keyword("歌手", 4));
 			
-			GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com");
-			//GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
+			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com");
+			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
 			
 			System.out.println("Size of results: " + query.getUrlList().size()); // search results
@@ -148,7 +149,7 @@ public class Main {
 			double pivot = ListForSearchResults.get(rightbound).nodeScore; // rightbound -> pivot
 			int count = leftbound-1; // how many keyword's count is smaller than that of pivot
 			for (int m=leftbound; m<rightbound; m++) {
-				if (ListForSearchResults.get(m).nodeScore < pivot) {
+				if (ListForSearchResults.get(m).nodeScore <= pivot) {
 					count++;
 					swap(count, m);
 				}
