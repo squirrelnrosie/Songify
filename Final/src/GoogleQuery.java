@@ -46,7 +46,7 @@ public class GoogleQuery
 
 		this.searchKeyword = searchKeyword;
 
-		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
+		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=10";
 
 	}
 

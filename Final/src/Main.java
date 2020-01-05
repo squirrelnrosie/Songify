@@ -38,8 +38,8 @@ public class Main {
 			keywords.add(new Keyword("專輯", 4));
 			keywords.add(new Keyword("歌手", 4));
 			
-			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
-			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
+			GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com");
+			//GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
 			
 			System.out.println("Size of results: " + query.getUrlList().size()); // search results
@@ -48,6 +48,7 @@ public class Main {
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
 			
 	
+			
 			/**
 			for (int a = 0; a<3; a++) {
 				subpage.fetchSubpage(query.getUrlList().get(a));
