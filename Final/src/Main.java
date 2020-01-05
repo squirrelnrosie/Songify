@@ -38,6 +38,7 @@ public class Main {
 			keywords.add(new Keyword("專輯", 4));
 			keywords.add(new Keyword("歌手", 4));
 			
+			
 			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
 			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
