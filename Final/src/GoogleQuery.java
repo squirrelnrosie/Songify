@@ -46,7 +46,7 @@ public class GoogleQuery
 
 		this.searchKeyword = searchKeyword;
 
-		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=10";
+		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
 
 	}
 
@@ -111,18 +111,18 @@ public class GoogleQuery
 				int http = url.indexOf("http");
 				int sa = url.indexOf("&sa");
 				url = url.substring(http, sa);
-				if (url.indexOf("youtube.com")==-1) {
+				if (url.indexOf("youtube.com")==-1 && url.indexOf(".pdf")==-1 && url.indexOf(".doc")==-1 && url.indexOf(".txt")==-1) {
 					ListForResultsUrl.add(url);
 				//	System.out.println(url);
 				}
 				
 				String title = li.select(".BNeawe").get(0).text();
-				if (title.indexOf("YouTube")==-1) {
+			//	if (title.indexOf("YouTube")==-1 && url.indexOf("PDF")==-1 && url.indexOf("pdf")==-1 && url.indexOf("DOC")==-1 && url.indexOf("doc")==-1 && url.indexOf("txt")==-1) {
 					if (ListForTitles.size()==ListForResultsUrl.size()-1) {
 						ListForTitles.add(title);
 				//		System.out.println(title);
 					}
-				}
+			//	}
 				if (title.indexOf("相關")!=-1 || title.indexOf("圖片")!=-1 || title.indexOf("Song Directory")!=-1 || title.indexOf("相关")!=-1) {
 					ListForTitles.remove(ListForTitles.size()-1);
 					ListForResultsUrl.remove(ListForResultsUrl.size()-1);
@@ -140,9 +140,9 @@ public class GoogleQuery
 //				String citeUrl = block.get(2).text();
 				
 //				System.out.println(title+" "+citeUrl);
-
-//				retVal.put(title, citeUrl);
-
+				if (ListForTitles.size() == (retVal.size()+1) && ListForResultsUrl.size() == (retVal.size()+1)) {
+					retVal.put(title, url);
+				}
 				
 
 			} catch (IndexOutOfBoundsException e) {
@@ -150,15 +150,18 @@ public class GoogleQuery
 
 			}
 			if (ListForTitles.size()!=ListForResultsUrl.size()) {
-				ListForTitles.remove(0);
+				System.out.println(ListForTitles.size());
+				System.out.println(ListForResultsUrl.size());
 			}
 			
 
 		}
+		
 		for (int a = 0; a<ListForResultsUrl.size(); a++) {
 			System.out.println(ListForTitles.get(a));
 			System.out.println(ListForResultsUrl.get(a));
 		}
+		System.out.println(retVal.size());
 		return retVal;
 
 	}

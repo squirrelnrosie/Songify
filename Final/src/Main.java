@@ -25,18 +25,34 @@ public class Main {
 		
 		try {
 			ArrayList<Keyword> keywords = new ArrayList<Keyword>();
-			keywords.add(new Keyword("lyrics", 5));
+			keywords.add(new Keyword("lyrics", 50));
 			keywords.add(new Keyword("song", 5));
 			keywords.add(new Keyword("composer", 3));
 			keywords.add(new Keyword("album", 4));
 			keywords.add(new Keyword("track", 4));
 			keywords.add(new Keyword("artist", 4));
+			keywords.add(new Keyword("vocal", 4));
+			keywords.add(new Keyword("producer", 4));
+			keywords.add(new Keyword("chorus", 50));
+			keywords.add(new Keyword("verse", 4));
+			keywords.add(new Keyword("written", 4));
+			//keywords.add(new Keyword("genius", 100));
+			keywords.add(new Keyword("Apple Music", -1000));
+			keywords.add(new Keyword("Apple_mobile", -1000));
+			keywords.add(new Keyword("App Store", -1000));
+			keywords.add(new Keyword("wikipedia", -1000));
+			keywords.add(new Keyword("facebook", -500));
+			keywords.add(new Keyword("維基", -1000));
 			keywords.add(new Keyword("歌詞", 5));
 			keywords.add(new Keyword("歌曲", 5));
 			keywords.add(new Keyword("作曲", 3));
 			keywords.add(new Keyword("作詞", 3));
 			keywords.add(new Keyword("專輯", 4));
 			keywords.add(new Keyword("歌手", 4));
+			keywords.add(new Keyword("魔鏡", 200));
+			keywords.add(new Keyword("熱門歌曲", 4));
+			keywords.add(new Keyword("所有專輯", 4));
+			keywords.add(new Keyword(teString, 1000));
 			
 			
 			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
@@ -48,31 +64,7 @@ public class Main {
 			Subpage subpage = new Subpage();
 			//System.out.println(subpage.fetchSubpage(query.getUrlList().get(0)));
 			
-	
-			/**
-			for (int a = 0; a<3; a++) {
-				subpage.fetchSubpage(query.getUrlList().get(a));
-			}
 			
-			for (int i=0; i<query.getUrlList().size(); i++) { // for each search result
-				WebPage rootPage = new WebPage(query.getUrlList().get(i), query.getTitleList().get(i));		
-				WebTree tree = new WebTree(rootPage);
-				ArrayList<String> ListForSubpage = subpage.fetchSubpage(query.getUrlList().get(i)); // list storing subpages for each result
-				// int SubpageSize = subpage.getSubpageSize();	
-				for (String sub:ListForSubpage) {
-					System.out.println("here");
-					tree.root.addChild(new WebNode(new WebPage(sub,"HI")));
-				}
-				System.out.println("Done");
-				for (int z = 0; z<10; z++) {
-					System.out.println(tree.root.children.get(z).webPage.url);
-				}
-				tree.setPostOrderScore(keywords);
-				System.out.println("Cal done.");
-				System.out.println("Score:" + tree.root.nodeScore);
-			}
-			*/
-		
 			for (int m = 0; m<query.getUrlList().size()-1; m++) {
 			//for (int m = 0; m<10; m++) {
 				WebPage rootPage = new WebPage(query.getUrlList().get(m), query.getTitleList().get(m));		
@@ -85,13 +77,13 @@ public class Main {
 				if (ListForSubpage.size()==0) {
 					System.out.println("No subpages");
 				}
-				else if (ListForSubpage.size()<3) {
+				else if (ListForSubpage.size()<2) {
 					for (String sub : ListForSubpage) {
 						tree.root.addChild(new WebNode(new WebPage(sub, "HI")));
 					}
 				}
 				else {
-					for (int s = 0; s<3; s++) {
+					for (int s = 0; s<2; s++) {
 						tree.root.addChild(new WebNode(new WebPage(ListForSubpage.get(s), "HI")));
 					}
 					System.out.println("Adding subpages is done.");
@@ -111,7 +103,8 @@ public class Main {
 				System.out.println();
 			}
 			sort();
-			Collections.reverse(ListForSearchResults);
+			Collections.reverse(ListForSearchResults); // finish sorting
+			
 			for(int x = 0; x<ListForSearchResults.size(); x++) {
 				System.out.print(ListForSearchResults.get(x).nodeScore + "\t");
 				System.out.println(ListForSearchResults.get(x).webPage.name);
@@ -119,6 +112,7 @@ public class Main {
 			
 			//相關搜尋結果
 			query.search();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,7 +142,7 @@ public class Main {
 			double pivot = ListForSearchResults.get(rightbound).nodeScore; // rightbound -> pivot
 			int count = leftbound-1; // how many keyword's count is smaller than that of pivot
 			for (int m=leftbound; m<rightbound; m++) {
-				if (ListForSearchResults.get(m).nodeScore < pivot) {
+				if (ListForSearchResults.get(m).nodeScore <= pivot) {
 					count++;
 					swap(count, m);
 				}
