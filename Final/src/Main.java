@@ -23,6 +23,7 @@ public class Main {
 		// System.out.println(input);
 			
 		
+		
 		try {
 			ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 			keywords.add(new Keyword("lyrics", 50));
@@ -54,8 +55,8 @@ public class Main {
 			keywords.add(new Keyword("所有專輯", 4));
 			keywords.add(new Keyword(teString, 1000));
 			
-			
 			//GoogleQuery query = new GoogleQuery(input + "site:genius.com+OR+site:mojim.com+OR+site:azlyrics.com");
+
 			GoogleQuery query = new GoogleQuery(input + "lyrics+genius+OR+魔鏡");
 			System.out.println(query.query());
 			
